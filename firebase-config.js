@@ -22,15 +22,15 @@
  */
 
 const FIREBASE_CONFIG = {
-  apiKey: "PASTE_YOUR_API_KEY_HERE",
-  authDomain: "PASTE_YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID",
+  apiKey: "AIzaSyB5HXG2RHnXOmje9YnfFO-jWxbw14BNi_M",
+  authDomain: "saiki-store-85b4e.firebaseapp.com",
+  projectId: "saiki-store-85b4e",
+  storageBucket: "saiki-store-85b4e.firebasestorage.app",
+  messagingSenderId: "608618400415",
+  appId: "1:608618400415:web:18e377af3acf2aeb0370aa",
 };
 
-const FIREBASE_IS_CONFIGURED = FIREBASE_CONFIG.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+const FIREBASE_IS_CONFIGURED = FIREBASE_CONFIG.apiKey !== "AIzaSyB5HXG2RHnXOmje9YnfFO-jWxbw14BNi_M";
 
 let db = null;
 let auth = null;
