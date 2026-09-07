@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KaSiih Store — Your Digital Gaming Store</title>
+<meta name="description" content="KaSiih Store: game accounts, diamonds, top up dan digital products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================= LOADER ============================= -->
+<div id="loader">
+  <canvas id="loader-canvas"></canvas>
+  <div class="loader-mark">KaSiih<span>.</span>Store</div>
+  <div class="loader-bar-track"><div class="loader-bar-fill" id="loader-fill"></div></div>
+  <div class="loader-pct" id="loader-pct">0%</div>
+</div>
+
+<!-- ============================= NAVBAR ============================= -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">KaSiih<span>.</span>Store</a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#store">Store</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#how-to-order">How To Order</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" id="cart-toggle" aria-label="Open cart">
+        🛒<span class="cart-count" id="cart-count">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero">Home</a>
+  <a href="#store">Store</a>
+  <a href="#categories">Categories</a>
+  <a href="#feedback">Feedback</a>
+  <a href="#how-to-order">How To Order</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============================= HERO ============================= -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
+  <div class="hero-content">
+    <h1 class="hero-title" id="hero-title"><span class="glow-pulse" data-brand-name>KaSiih Store</span></h1>
+    <p class="hero-tagline" id="hero-tagline"></p>
+    <p class="hero-sub" id="hero-sub"></p>
+    <div class="hero-actions">
+      <a href="#store" class="btn btn-primary">Explore Store</a>
+      <a href="#contact" class="btn btn-ghost">Contact Seller</a>
+    </div>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============================= CATEGORIES ============================= -->
+<section id="categories" class="section">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="kicker">Browse by game</div>
+      <h2>Explore Games</h2>
+      <p>Pilih kategori untuk lihat produk yang tersedia untuk game pilihan anda.</p>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============================= STORE ============================= -->
+<section id="store" class="section">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="kicker">Catalogue</div>
+      <h2>Featured Products</h2>
+      <p>Semua harga dalam Ringgit Malaysia. Status stok dikemaskini secara berkala.</p>
+    </div>
+    <div class="filter-row" id="filter-row"></div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============================= FEEDBACK ============================= -->
+<section id="feedback" class="section">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="kicker">Real customers</div>
+      <h2>Customer Feedback</h2>
+      <p>Screenshot sebenar daripada pelanggan KaSiih Store.</p>
+    </div>
+    <div class="feedback-grid" id="feedback-grid"></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============================= SOCIAL ============================= -->
+<section id="tiktok" class="section" style="padding-top:0">
+  <div class="container">
+    <div class="tiktok-panel reveal-up">
+      <div class="kicker">Follow along</div>
+      <h2>Follow KaSiih Store</h2>
+      <div class="social-row" style="margin-top:1.8rem">
+        <div class="social-card">
+          <div class="social-platform">TikTok</div>
+          <div class="social-handle-sm" id="tiktok-handle">@username</div>
+          <a href="#" id="tiktok-follow" target="_blank" rel="noopener" class="btn btn-primary magnetic-btn">Follow on TikTok</a>
+        </div>
+        <div class="social-card">
+          <div class="social-platform">Instagram</div>
+          <div class="social-handle-sm" id="instagram-handle">@username</div>
+          <a href="#" id="instagram-follow" target="_blank" rel="noopener" class="btn btn-ghost magnetic-btn">Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TRUST ============================= -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <div class="trust-grid" id="trust-grid"></div>
+  </div>
+</section>
+
+<div class="seam"></div>
+
+<!-- ============================= HOW TO ORDER ============================= -->
+<section id="how-to-order" class="section">
+  <div class="container">
+    <div class="section-head reveal-up">
+      <div class="kicker">Getting started</div>
+      <h2>How To Order</h2>
+      <p>Empat langkah mudah dari pilih produk sampai terima barang.</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ============================= CONTACT / FOOTER ============================= -->
+<footer id="contact">
+  <div class="container">
+    <p><strong data-brand-name>KaSiih Store</strong> — Your Digital Gaming Store</p>
+    <p style="margin-top:0.6rem">
+      <a href="#" data-whatsapp-link target="_blank" rel="noopener">WhatsApp</a> ·
+      <a href="#" data-telegram-link target="_blank" rel="noopener">Telegram</a> ·
+      <a href="#" id="tiktok-follow-2" target="_blank" rel="noopener">TikTok</a> ·
+      <a href="#" id="instagram-follow-2" target="_blank" rel="noopener">Instagram</a>
+    </p>
+    <p style="margin-top:1rem">© <span id="year"></span> KaSiih Store. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============================= PRODUCT MODAL ============================= -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal-box" style="position:relative">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <img class="modal-img" src="" alt="">
+    <div class="modal-content">
+      <div class="product-cat m-cat"></div>
+      <h3 class="m-name" style="margin-top:0.4rem"></h3>
+      <p class="m-desc" style="color:var(--ink-faint);margin-top:0.6rem"></p>
+      <div class="product-foot">
+        <span class="price-block">
+          <span class="product-price m-price"></span>
+          <span class="m-price-original"></span>
+        </span>
+        <span class="product-rating m-rating"></span>
+      </div>
+      <button class="buy-btn m-buy"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= CART DRAWER ============================= -->
+<div class="cart-overlay" id="cart-overlay">
+  <div class="cart-drawer">
+    <div class="cart-head">
+      <h3>Your Cart</h3>
+      <button class="modal-close" id="cart-close" style="position:static" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row"><span>Total</span><span class="amount" id="cart-total">RM0.00</span></div>
+      <button class="checkout-btn" id="checkout-btn">CHECKOUT VIA WHATSAPP</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= LIGHTBOX ============================= -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+  <img src="" alt="Customer feedback screenshot">
+</div>
+
+<!-- ============================= TOAST ============================= -->
+<div class="toast" id="toast"><span class="dot"></span><span class="msg"></span></div>
+
+<!-- Firebase (compat build — works with plain <script> tags, no build step) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

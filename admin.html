@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KaSiih Store — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- SHOWN WHEN firebase-config.js IS STILL PLACEHOLDER VALUES -->
+<div id="setup-notice">
+  <div class="setup-box">
+    <h1>⚠️ Firebase belum disetup</h1>
+    <p>Admin panel ini perlukan Firebase (percuma) supaya perubahan anda live untuk semua pelawat. Buka fail <code>firebase-config.js</code> dan ikut arahan di dalamnya, atau lihat <code>README.md</code> untuk panduan penuh:</p>
+    <ol>
+      <li>Buat project di <code>console.firebase.google.com</code></li>
+      <li>Aktifkan <strong>Firestore Database</strong></li>
+      <li>Aktifkan <strong>Authentication → Email/Password</strong>, tambah satu user (email + password anda)</li>
+      <li>Copy <code>firebaseConfig</code> dari Project Settings → tampal dalam <code>firebase-config.js</code></li>
+      <li>Refresh page ini</li>
+    </ol>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>KaSiih Store Admin</h1>
+    <p class="hint">Login guna email/password yang anda daftar dalam Firebase Authentication.</p>
+    <form id="login-form">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" required>
+      <label for="login-pass">Password</label>
+      <input type="password" id="login-pass" required>
+      <div class="error-msg" id="login-error">Password salah, cuba lagi.</div>
+      <button type="submit" style="width:100%">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <div class="admin-header">
+    <h1>KaSiih Store — Admin</h1>
+    <div style="display:flex;gap:0.8rem;align-items:center">
+      <a class="back" href="index.html">← View store</a>
+      <span class="admin-email" id="admin-email"></span>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-banner">
+    ✅ Perubahan di sini disimpan ke Firebase dan terus live untuk semua pelawat website — tak perlu edit kod.
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="tab-products">Products</button>
+    <button class="admin-tab" data-tab="tab-feedback">Feedback</button>
+    <button class="admin-tab" data-tab="tab-settings">Settings</button>
+  </div>
+
+  <div class="admin-content">
+
+    <!-- PRODUCTS -->
+    <div class="admin-panel active" id="tab-products">
+      <div class="panel-head">
+        <h2>Products</h2>
+        <button id="add-product-btn">+ Add Product</button>
+      </div>
+      <table>
+        <thead><tr><th></th><th>Name</th><th>Price</th><th>Status</th><th></th></tr></thead>
+        <tbody id="product-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="admin-panel" id="tab-feedback">
+      <div class="panel-head">
+        <h2>Customer Feedback</h2>
+        <button id="add-feedback-btn">+ Add Feedback</button>
+      </div>
+      <table>
+        <thead><tr><th></th><th>Username</th><th>Product / Rating</th><th></th></tr></thead>
+        <tbody id="feedback-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="admin-panel" id="tab-settings">
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:1.2rem">Contact & Social Links</h2>
+      <form id="settings-form" class="card">
+        <label>WhatsApp number (digits only, country code first)</label>
+        <input name="whatsapp" placeholder="60123456789" required>
+        <label>Default WhatsApp message</label>
+        <textarea name="whatsappMessage" rows="2"></textarea>
+        <label>Telegram link</label>
+        <input name="telegram" placeholder="https://t.me/yourusername">
+        <label>TikTok username</label>
+        <input name="tiktokUsername" placeholder="@yourusername">
+        <label>TikTok link</label>
+        <input name="tiktokUrl" placeholder="https://www.tiktok.com/@yourusername">
+        <label>Instagram username</label>
+        <input name="instagramUsername" placeholder="@yourusername">
+        <label>Instagram link</label>
+        <input name="instagramUrl" placeholder="https://www.instagram.com/yourusername">
+        <button type="submit" style="width:100%">Save Settings</button>
+      </form>
+
+      <hr class="sep">
+
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:1.2rem">First Time Setup</h2>
+      <div class="card">
+        <p class="muted" style="margin-top:0">Belum ada produk lagi dalam database? Klik ni untuk load produk contoh dari config.js supaya anda ada starting point.</p>
+        <button id="seed-btn">Seed Sample Data</button>
+      </div>
+
+      <hr class="sep">
+
+      <h2 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:1.2rem">Password</h2>
+      <div class="card">
+        <p class="muted" style="margin-top:0">Password ditukar dari Firebase Console, bukan di sini — pergi ke <strong>Authentication → Users</strong>, klik akaun anda, dan pilih "Reset password". Ini lebih selamat berbanding simpan password dalam kod website.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="admin-modal-overlay" id="product-modal-admin">
+  <div class="admin-modal-box">
+    <button class="admin-modal-close" id="product-modal-close" aria-label="Close">✕</button>
+    <h3 id="product-form-title">Add Product</h3>
+    <form id="product-form">
+      <label>Name</label>
+      <input name="name" required>
+      <label>Category</label>
+      <select name="category" required></select>
+      <label>Description</label>
+      <textarea name="description" rows="2" required></textarea>
+      <label>Selling Price (RM)</label>
+      <input name="price" type="number" step="0.01" min="0" required>
+      <label>Original Price — isi jika ada promo (kosongkan jika tiada)</label>
+      <input name="originalPrice" type="number" step="0.01" min="0" placeholder="Contoh: 25.00">
+      <label>Rating (1–5)</label>
+      <input name="rating" type="number" min="1" max="5" value="5" required>
+      <label>Upload Image (disyorkan)</label>
+      <input name="imageFile" type="file" accept="image/*">
+      <label>Atau Image URL (jika tak upload)</label>
+      <input name="image" placeholder="https://...">
+      <p class="muted" style="margin-top:-0.4rem">Gambar akan dimampat automatik sebelum disimpan.</p>
+      <div class="checkbox-row">
+        <input type="checkbox" name="available" id="p-available" checked>
+        <label for="p-available" style="margin:0">Available</label>
+      </div>
+      <button type="submit" style="width:100%">Save Product</button>
+    </form>
+  </div>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div class="admin-modal-overlay" id="feedback-modal-admin">
+  <div class="admin-modal-box">
+    <button class="admin-modal-close" id="feedback-modal-close" aria-label="Close">✕</button>
+    <h3>Add Feedback</h3>
+    <form id="feedback-form">
+      <label>Customer username</label>
+      <input name="username" required>
+      <label>Product name</label>
+      <input name="product" required>
+      <label>Rating (1–5)</label>
+      <input name="rating" type="number" min="1" max="5" value="5" required>
+      <label>Upload Screenshot (disyorkan)</label>
+      <input name="imageFile" type="file" accept="image/*">
+      <label>Atau Image URL (jika tak upload)</label>
+      <input name="image" placeholder="https://...">
+      <p class="muted" style="margin-top:-0.4rem">Gambar akan dimampat automatik sebelum disimpan.</p>
+      <button type="submit" style="width:100%">Save Feedback</button>
+    </form>
+  </div>
+</div>
+
+<div id="admin-toast"></div>
+
+<!-- Firebase (compat build — works with plain <script> tags, no build step) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
